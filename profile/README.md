@@ -1,10 +1,12 @@
 <div align="center">
 
 <a href="https://html2img.com">
-  <img src="https://html2img.com/og-image.png" alt="HTML to Image" width="640">
+  <img src="https://html2img.com/og-image.png" alt="HTML to Image API" width="640">
 </a>
 
-# HTML to Image API
+<a href="https://html2img.com">
+  # HTML to Image API
+</a>
 
 **Convert HTML, CSS or any URL into a PNG with a single API call.**
 
