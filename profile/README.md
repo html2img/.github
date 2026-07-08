@@ -26,7 +26,7 @@
 
 [HTML to Image](https://html2img.com) is a REST API that turns raw HTML and CSS, a live URL, or a named JSON template into a PNG in seconds. Every render runs in real Chrome, so flexbox, grid, custom properties, web fonts and inline JavaScript behave exactly as they do in the browser. The first 25 renders each month are free, with no card required.
 
-This organisation hosts the official client libraries for the API. Watch or star it to get notified when they ship.
+This organisation hosts the official client libraries for the API. The [PHP SDK](https://github.com/html2img/html2img-php) and [Laravel integration](https://github.com/html2img/html2img-laravel) are available now on Packagist. Watch or star the repos to get notified when more ship.
 
 ## Quick start
 
@@ -68,6 +68,58 @@ The base URL for every endpoint is `https://app.html2img.com`. Full parameter re
 - **URL screenshots**, full page or selector cropped, with CSS injection to remove cookie banners and sticky headers before capture. [See screenshot examples](https://html2img.com/docs/examples)
 
 There are [25 named templates](https://html2img.com/templates) in total, covering social, commerce, content and marketing.
+
+## Official packages
+
+Install the official libraries from Packagist. Anything else works over plain HTTP today.
+
+| Language | Install | Repo | Status |
+| --- | --- | --- | --- |
+| PHP | `composer require html2img/html2img-php` | [html2img-php](https://github.com/html2img/html2img-php) | Available |
+| Laravel | `composer require html2img/html2img-laravel` | [html2img-laravel](https://github.com/html2img/html2img-laravel) | Available |
+| JavaScript and Node.js | npm | | In development |
+| Python, Ruby and more | | | Planned |
+
+### PHP
+
+Framework-agnostic, built on Guzzle, returns a typed response object. Requires PHP 8.3+.
+
+```php
+use Html2img\Html2imgClient;
+use Html2img\Request\HtmlRequest;
+
+$client = new Html2imgClient('your-api-key');
+
+$response = $client->html(new HtmlRequest(
+    html: '<!doctype html><html><body><h1>Hello</h1></body></html>',
+    width: 1200,
+    height: 630,
+));
+
+echo $response->url; // https://i.html2img.com/abc123def456.png
+```
+
+See the [PHP SDK readme](https://github.com/html2img/html2img-php) and the [PHP guide](https://html2img.com/docs/usage/php).
+
+### Laravel
+
+Zero-config auto-discovery, a `Html2img` facade, a published config file, one-line saving to any filesystem disk, and an `html2img:test` artisan health check. Requires Laravel 11 or 12.
+
+```php
+use Html2img\Laravel\Facades\Html2img;
+use Html2img\Request\HtmlRequest;
+
+$response = Html2img::html(new HtmlRequest(
+    html: view('og.post', ['post' => $post])->render(),
+    width: 1200,
+    height: 630,
+    dpi: 2,
+));
+
+$path = Html2img::store($response, "og/{$post->id}.png");
+```
+
+See the [Laravel integration readme](https://github.com/html2img/html2img-laravel) and the [Laravel guide](https://html2img.com/docs/usage/laravel).
 
 ## Free browser tools
 
@@ -121,19 +173,6 @@ Honest, side-by-side notes against the common alternatives, covering pricing, fe
 - [How to generate dynamic Open Graph images in Laravel](https://html2img.com/articles/how-to-generate-dynamic-open-graph-images-in-laravel/)
 - [Why `@vercel/og` fails on emoji and how to fix it](https://html2img.com/articles/why-vercel-og-fails-on-emoji-and-how-to-fix-it/)
 - [All articles](https://html2img.com/articles)
-
-## Official packages
-
-Client libraries are in development and will live here under this organisation.
-
-| Language | Package | Status |
-| --- | --- | --- |
-| PHP | Composer | In development |
-| Laravel | Composer | In development |
-| JavaScript and Node.js | npm | In development |
-| Python, Ruby and more | | Planned |
-
-Until they land, the API works from any language over HTTP. Start with the [language guides](https://html2img.com/docs/usage).
 
 ## Pricing
 
