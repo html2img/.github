@@ -4,9 +4,8 @@
   <img src="https://html2img.com/og-image.png" alt="HTML to Image API" width="640">
 </a>
 
-<a href="https://html2img.com">
-  <h1>HTML to Image API</h1>
-</a>
+
+<h1><a href="https://html2img.com">HTML to Image API</a></h1>
 
 **Convert HTML, CSS or any URL into a PNG with a single API call.**
 
