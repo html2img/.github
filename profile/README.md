@@ -5,7 +5,7 @@
 </a>
 
 <a href="https://html2img.com">
-  # HTML to Image API
+  <h1>HTML to Image API</h1>
 </a>
 
 **Convert HTML, CSS or any URL into a PNG with a single API call.**
